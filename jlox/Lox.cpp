@@ -61,7 +61,7 @@ namespace jlox {
     void Lox::run(const std::string& source) {
         Scanner scanner{source, this};
 
-        for (const auto tokens = scanner.scanTokens(); auto& token: tokens) {
+        for (const auto tokens = scanner.scan_tokens(); auto& token: tokens) {
             cout << token << '\n';
         }
     }

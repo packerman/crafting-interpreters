@@ -1,7 +1,7 @@
 #include "Scanner.h"
 
 namespace jlox {
-    std::vector<Token> Scanner::scanTokens() {
+    std::vector<Token> Scanner::scan_tokens() {
         while (!is_at_end()) {
             start_ = current_;
             scan_token();

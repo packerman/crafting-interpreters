@@ -12,7 +12,7 @@ namespace jlox {
                                                                               error_reporter_(error_reporter) {
         }
 
-        std::vector<Token> scanTokens();
+        std::vector<Token> scan_tokens();
 
     private:
         [[nodiscard]] bool is_at_end() const;
