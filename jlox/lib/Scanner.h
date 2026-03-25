@@ -8,8 +8,8 @@
 namespace jlox {
     class Scanner {
     public:
-        explicit Scanner(std::string source, ErrorReporter* error_reporter) : source_{std::move(source)},
-                                                                              error_reporter_(error_reporter) {
+        Scanner(std::string source, ErrorReporter* error_reporter) : source_{std::move(source)},
+                                                                     error_reporter_(error_reporter) {
         }
 
         std::vector<Token> scan_tokens();

@@ -7,7 +7,7 @@ namespace jlox {
             scan_token();
         }
 
-        tokens_.emplace_back(TokenType::LOX_EOF, "", nullptr, line_);
+        tokens_.emplace_back(TokenType::END_OF_FILE, "", nullptr, line_);
         return tokens_;
     }
 
@@ -67,7 +67,7 @@ namespace jlox {
     }
 
     void Scanner::scan_token() {
-        switch (const char c = advance()) {
+        switch (advance()) {
             case '(':
                 add_token(TokenType::LEFT_PAREN);
                 break;

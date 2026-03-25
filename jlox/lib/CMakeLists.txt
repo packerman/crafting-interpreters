@@ -2,6 +2,8 @@ add_library(lib_jlox)
 
 target_sources(lib_jlox
         PRIVATE
+        Lox.h
+        Lox.cpp
         ErrorReporter.h
         TokenType.h
         TokenType.cpp

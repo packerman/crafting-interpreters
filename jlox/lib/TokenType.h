@@ -14,7 +14,7 @@ namespace jlox {
         IDENTIFIER, STRING, NUMBER,
 
         AND, CLASS, ELSE, FALSE, FUN, FOR, IF, NIL, OR,
-        PRINT, RETURN, SUPER, THIS, TRUE, VAR, WHILE, LOX_EOF
+        PRINT, RETURN, SUPER, THIS, TRUE, VAR, WHILE, END_OF_FILE
     };
 
     std::ostream& operator<<(std::ostream& os, TokenType token_type);

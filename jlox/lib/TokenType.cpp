@@ -4,124 +4,124 @@ namespace jlox {
     std::ostream& operator<<(std::ostream& os, const TokenType token_type) {
         switch (token_type) {
             case TokenType::LEFT_PAREN:
-                os << "LEFT_PAREN" << '\n';
+                os << "LEFT_PAREN";
                 break;
             case TokenType::RIGHT_PAREN:
-                os << "RIGHT_PAREN" << '\n';
+                os << "RIGHT_PAREN";
                 break;
             case TokenType::LEFT_BRACE:
-                os << "LEFT_BRACE" << '\n';
+                os << "LEFT_BRACE";
                 break;
             case TokenType::RIGHT_BRACE:
-                os << "RIGHT_BRACE" << '\n';
+                os << "RIGHT_BRACE";
                 break;
             case TokenType::COMMA:
-                os << "COMMA" << '\n';
+                os << "COMMA";
                 break;
             case TokenType::DOT:
-                os << "DOT" << '\n';
+                os << "DOT";
                 break;
             case TokenType::MINUS:
-                os << "MINUS" << '\n';
+                os << "MINUS";
                 break;
             case TokenType::PLUS:
-                os << "PLUS" << '\n';
+                os << "PLUS";
                 break;
             case TokenType::SEMICOLON:
-                os << "SEMICOLON" << '\n';
+                os << "SEMICOLON";
                 break;
             case TokenType::SLASH:
-                os << "SLASH" << '\n';
+                os << "SLASH";
                 break;
             case TokenType::STAR:
-                os << "STAR" << '\n';
+                os << "STAR";
                 break;
             case TokenType::BANG:
-                os << "BANG" << '\n';
+                os << "BANG";
                 break;
             case TokenType::BANG_EQUAL:
-                os << "BANG_EQUAL" << '\n';
+                os << "BANG_EQUAL";
                 break;
             case TokenType::EQUAL:
-                os << "EQUAL" << '\n';
+                os << "EQUAL";
                 break;
             case TokenType::EQUAL_EQUAL:
-                os << "EQUAL_EQUAL" << '\n';
+                os << "EQUAL_EQUAL";
                 break;
             case TokenType::GREATER:
-                os << "GREATER" << '\n';
+                os << "GREATER";
                 break;
             case TokenType::GREATER_EQUAL:
-                os << "GREATER_EQUAL" << '\n';
+                os << "GREATER_EQUAL";
                 break;
             case TokenType::LESS:
-                os << "LESS" << '\n';
+                os << "LESS";
                 break;
             case TokenType::LESS_EQUAL:
-                os << "LESS_EQUAL" << '\n';
+                os << "LESS_EQUAL";
                 break;
             case TokenType::IDENTIFIER:
-                os << "IDENTIFIER" << '\n';
+                os << "IDENTIFIER";
                 break;
             case TokenType::STRING:
-                os << "STRING" << '\n';
+                os << "STRING";
                 break;
             case TokenType::NUMBER:
-                os << "NUMBER" << '\n';
+                os << "NUMBER";
                 break;
             case TokenType::AND:
-                os << "AND" << '\n';
+                os << "AND";
                 break;
             case TokenType::CLASS:
-                os << "CLASS" << '\n';
+                os << "CLASS";
                 break;
             case TokenType::ELSE:
-                os << "ELSE" << '\n';
+                os << "ELSE";
                 break;
             case TokenType::FALSE:
-                os << "FALSE" << '\n';
+                os << "FALSE";
                 break;
             case TokenType::FUN:
-                os << "FUN" << '\n';
+                os << "FUN";
                 break;
             case TokenType::FOR:
-                os << "FOR" << '\n';
+                os << "FOR";
                 break;
             case TokenType::IF:
-                os << "IF" << '\n';
+                os << "IF";
                 break;
             case TokenType::NIL:
-                os << "NIL" << '\n';
+                os << "NIL";
                 break;
             case TokenType::OR:
-                os << "OR" << '\n';
+                os << "OR";
                 break;
             case TokenType::PRINT:
-                os << "PRINT" << '\n';
+                os << "PRINT";
                 break;
             case TokenType::RETURN:
-                os << "RETURN" << '\n';
+                os << "RETURN";
                 break;
             case TokenType::SUPER:
-                os << "SUPER" << '\n';
+                os << "SUPER";
                 break;
             case TokenType::THIS:
-                os << "THIS" << '\n';
+                os << "THIS";
                 break;
             case TokenType::TRUE:
-                os << "TRUE" << '\n';
+                os << "TRUE";
                 break;
             case TokenType::VAR:
-                os << "VAR" << '\n';
+                os << "VAR";
                 break;
             case TokenType::WHILE:
-                os << "WHILE" << '\n';
+                os << "WHILE";
                 break;
-            case TokenType::LOX_EOF:
-                os << "EOF" << '\n';
+            case TokenType::END_OF_FILE:
+                os << "END_OF_FILE";
                 break;
             default:
-                os << "UNKNOWN_TOKEN_TYPE" << '\n';
+                os << "UNKNOWN_TOKEN_TYPE";
         }
         return os;
     }

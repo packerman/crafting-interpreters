@@ -1,5 +1,5 @@
 #pragma once
-#include "lib/ErrorReporter.h"
+#include "ErrorReporter.h"
 
 namespace jlox {
     class Lox : public ErrorReporter {

@@ -8,19 +8,6 @@
 
 using namespace std;
 
-int main(const int argc, char* argv[]) {
-    if (argc > 2) {
-        cout << "Usage: jlox [script]\n";
-        exit(64);
-    }
-    jlox::Lox lox;
-    if (argc == 2) {
-        lox.run_file(argv[1]);
-    } else {
-        lox.run_prompt();
-    }
-}
-
 namespace jlox {
 
     void Lox::run_file(const char* path) {
