@@ -1,5 +1,7 @@
 #pragma once
+
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 #include "ErrorReporter.h"
@@ -31,9 +33,15 @@ namespace jlox {
 
         static bool is_digit(char c);
 
-        char peek_next() const;
+        [[nodiscard]] char peek_next() const;
 
         void number();
+
+        static bool is_alpha(char c);
+
+        static bool is_alpha_numeric(char c);
+
+        void identifier();
 
         void scan_token();
 
@@ -44,5 +52,24 @@ namespace jlox {
         int start_{0};
         int current_{0};
         int line_{1};
+
+        inline static const std::unordered_map<std::string, TokenType> keywords_ = {
+            {"and", TokenType::AND},
+            {"class", TokenType::CLASS},
+            {"else", TokenType::ELSE},
+            {"false", TokenType::FALSE},
+            {"for", TokenType::FOR},
+            {"fun", TokenType::FUN},
+            {"if", TokenType::IF},
+            {"nil", TokenType::NIL},
+            {"or", TokenType::OR},
+            {"print", TokenType::PRINT},
+            {"return", TokenType::RETURN},
+            {"super", TokenType::SUPER},
+            {"this", TokenType::THIS},
+            {"true", TokenType::TRUE},
+            {"var", TokenType::VAR},
+            {"while", TokenType::WHILE}
+        };
     };
 }

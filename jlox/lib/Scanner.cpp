@@ -94,8 +94,33 @@ namespace jlox {
                   std::stod(source_.substr(start_, current_ - start_)));
     }
 
+    bool Scanner::is_alpha(const char c) {
+        return (c >= 'a' && c <= 'z') ||
+               (c >= 'A' && c <= 'Z') ||
+               c == '_';
+    }
+
+    bool Scanner::is_alpha_numeric(const char c) {
+        return is_alpha(c) || is_digit(c);
+    }
+
+    void Scanner::identifier() {
+        while (is_alpha_numeric(peek())) {
+            advance();
+        }
+
+        const auto text = source_.substr(start_, current_ - start_);
+        TokenType type;
+        if (const auto search = keywords_.find(text); search != keywords_.end()) {
+            type = search->second;
+        } else {
+            type = TokenType::IDENTIFIER;
+        }
+        add_token(type);
+    }
+
     void Scanner::scan_token() {
-        switch (char c = advance()) {
+        switch (const char c = advance()) {
             case '(':
                 add_token(TokenType::LEFT_PAREN);
                 break;
@@ -164,6 +189,8 @@ namespace jlox {
             default:
                 if (is_digit(c)) {
                     number();
+                } else if (is_alpha(c)) {
+                    identifier();
                 } else {
                     error_reporter_->error(line_, "Unexpected character.");
                 }

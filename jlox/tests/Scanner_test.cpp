@@ -67,6 +67,15 @@ namespace jlox {
                     {TokenType::NUMBER, "123.456", 123.456, 4},
                     {TokenType::END_OF_FILE, "", nullptr, 5}
                     })
+            ),
+            make_tuple(
+                "orchid or \"orchid or\"",
+                vector<Token>({
+                    {TokenType::IDENTIFIER, "orchid", nullptr, 1},
+                    {TokenType::OR, "or", nullptr, 1},
+                    {TokenType::STRING, "\"orchid or\"", "orchid or", 1},
+                    {TokenType::END_OF_FILE, "", nullptr, 1}
+                    })
             )
         ));
 }
