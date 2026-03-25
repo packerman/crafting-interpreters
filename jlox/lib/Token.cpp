@@ -15,7 +15,7 @@ namespace jlox {
     std::ostream& operator<<(std::ostream& os, const Token& token) {
         os
                 << "token_type: " << token.token_type_
-                << " lexeme: " << token.lexeme_
+                << " lexeme: '" << token.lexeme_ << "'"
                 << " literal: ";
         switch (token.token_type_) {
             case TokenType::STRING:
