@@ -23,6 +23,12 @@ namespace jlox {
 
         void add_token(TokenType type, const Literal& literal);
 
+        bool match(char expected);
+
+        [[nodiscard]] char peek() const;
+
+        void string();
+
         void scan_token();
 
         std::string source_;
