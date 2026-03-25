@@ -54,6 +54,19 @@ namespace jlox {
                     {TokenType::STRING, "\"three\"", "three", 2},
                     {TokenType::DOT, ".", nullptr, 2},
                     {TokenType::END_OF_FILE, "", nullptr, 3}
-                    }))
+                    })),
+            make_tuple(R"(
+                123
+                -123
+                123.456
+                )",
+                vector<Token>({
+                    {TokenType::NUMBER, "123", 123.0, 2},
+                    {TokenType::MINUS, "-", nullptr, 3},
+                    {TokenType::NUMBER, "123", 123.0, 3},
+                    {TokenType::NUMBER, "123.456", 123.456, 4},
+                    {TokenType::END_OF_FILE, "", nullptr, 5}
+                    })
+            )
         ));
 }

@@ -29,6 +29,12 @@ namespace jlox {
 
         void string();
 
+        static bool is_digit(char c);
+
+        char peek_next() const;
+
+        void number();
+
         void scan_token();
 
         std::string source_;

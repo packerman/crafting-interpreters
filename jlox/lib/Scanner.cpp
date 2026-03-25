@@ -66,8 +66,36 @@ namespace jlox {
         add_token(TokenType::STRING, value);
     }
 
+    bool Scanner::is_digit(const char c) {
+        return c >= '0' && c <= '9';
+    }
+
+    char Scanner::peek_next() const {
+        if (current_ + 1 >= source_.length()) {
+            return '\0';
+        }
+        return source_[current_ + 1];
+    }
+
+    void Scanner::number() {
+        while (is_digit(peek())) {
+            advance();
+        }
+
+        if (peek() == '.' && is_digit(peek_next())) {
+            advance();
+        }
+
+        while (is_digit(peek())) {
+            advance();
+        }
+
+        add_token(TokenType::NUMBER,
+                  std::stod(source_.substr(start_, current_ - start_)));
+    }
+
     void Scanner::scan_token() {
-        switch (advance()) {
+        switch (char c = advance()) {
             case '(':
                 add_token(TokenType::LEFT_PAREN);
                 break;
@@ -134,7 +162,11 @@ namespace jlox {
                 break;
 
             default:
-                error_reporter_->error(line_, "Unexpected character.");
+                if (is_digit(c)) {
+                    number();
+                } else {
+                    error_reporter_->error(line_, "Unexpected character.");
+                }
                 break;
         }
     }
