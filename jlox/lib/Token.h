@@ -20,6 +20,10 @@ namespace jlox {
               line_(line) {
         }
 
+        friend bool operator==(const Token& lhs, const Token& rhs);
+
+        friend bool operator!=(const Token& lhs, const Token& rhs);
+
         friend std::ostream& operator<<(std::ostream& os, const Token& token);
 
     private:
