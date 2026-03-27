@@ -11,6 +11,7 @@ target_sources(lib_jlox
         Token.cpp
         Scanner.h
         Scanner.cpp
+        Ast.h
 )
 
 target_include_directories(lib_jlox
