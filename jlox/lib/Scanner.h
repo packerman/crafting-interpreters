@@ -23,7 +23,7 @@ namespace jlox {
 
         void add_token(TokenType type);
 
-        void add_token(TokenType type, const Literal& literal);
+        void add_token(TokenType type, const literal_t& literal);
 
         bool match(char expected);
 

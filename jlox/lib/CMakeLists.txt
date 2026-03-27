@@ -12,6 +12,7 @@ target_sources(lib_jlox
         Scanner.h
         Scanner.cpp
         Ast.h
+        Ast.cpp
 )
 
 target_include_directories(lib_jlox

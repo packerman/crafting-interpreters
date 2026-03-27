@@ -8,11 +8,11 @@
 #include "TokenType.h"
 
 namespace jlox {
-    using Literal = std::variant<std::nullptr_t, std::string, double>;
+    using literal_t = std::variant<std::nullptr_t, std::string, double>;
 
     class Token {
     public:
-        Token(const TokenType token_type, std::string lexeme, Literal literal,
+        Token(const TokenType token_type, std::string lexeme, literal_t literal,
               const int line)
             : token_type_(token_type),
               lexeme_(std::move(lexeme)),
@@ -29,7 +29,7 @@ namespace jlox {
     private:
         TokenType token_type_;
         std::string lexeme_;
-        Literal literal_;
+        literal_t literal_;
         int line_;
     };
 }

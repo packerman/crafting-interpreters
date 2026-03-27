@@ -23,7 +23,7 @@ namespace jlox {
         add_token(type, nullptr);
     }
 
-    void Scanner::add_token(TokenType type, const Literal& literal) {
+    void Scanner::add_token(TokenType type, const literal_t& literal) {
         auto text = source_.substr(start_, current_ - start_);
         tokens_.emplace_back(type, text, literal, line_);
     }

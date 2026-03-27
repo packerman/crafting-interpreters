@@ -1,1 +1,147 @@
 #pragma once
+
+#include <memory>
+#include <utility>
+
+#include "Token.h"
+
+namespace jlox {
+    class Binary;
+    class Grouping;
+    class Literal;
+    class Unary;
+
+    class Expr {
+    public:
+        template<typename R>
+        class Visitor {
+        public:
+            virtual ~Visitor() = default;
+
+            virtual R visit(const Binary*) const = 0;
+
+            virtual R visit(const Grouping*) const = 0;
+
+            virtual R visit(const Literal*) const = 0;
+
+            virtual R visit(const Unary*) const = 0;
+        };
+
+        virtual ~Expr() = default;
+
+        template<typename R>
+        R accept(Visitor<R>& visitor) const {
+            return accept_impl(visitor);
+        }
+
+    private:
+        virtual void accept_impl(Visitor<void>& visitor) const = 0;
+    };
+
+    class Binary : public Expr {
+    public:
+        Binary(std::unique_ptr<Expr> left, Token operator_token, std::unique_ptr<Expr> right)
+            : left_(std::move(left)),
+              operator_(std::move(operator_token)),
+              right_(std::move(right)) {
+        }
+
+        ~Binary() override;
+
+        [[nodiscard]] const Expr& left() const {
+            return *left_;
+        }
+
+        [[nodiscard]] const Token& operator_token() const {
+            return operator_;
+        }
+
+        [[nodiscard]] const Expr& right() const {
+            return *right_;
+        }
+
+    private:
+        void accept_impl(Visitor<void>& visitor) const override {
+            visitor.visit(this);
+        }
+
+        std::unique_ptr<Expr> left_;
+        Token operator_;
+        std::unique_ptr<Expr> right_;
+    };
+
+    std::unique_ptr<Expr> make_binary(std::unique_ptr<Expr>& left, const Token& operator_token,
+                                      std::unique_ptr<Expr>& right);
+
+    class Grouping : public Expr {
+    public:
+        explicit Grouping(std::unique_ptr<Expr> expression)
+            : expression_(std::move(expression)) {
+        }
+
+        ~Grouping() override;
+
+        [[nodiscard]] const Expr& expression() const {
+            return *expression_;
+        }
+
+    private:
+        void accept_impl(Visitor<void>& visitor) const override {
+            visitor.visit(this);
+        }
+
+        std::unique_ptr<Expr> expression_;
+    };
+
+    std::unique_ptr<Expr> make_grouping(std::unique_ptr<Expr>& expression);
+
+    class Literal : public Expr {
+    public:
+        explicit Literal(literal_t value)
+            : value_(std::move(value)) {
+        }
+
+        ~Literal() override;
+
+        [[nodiscard]] const literal_t& value() const {
+            return value_;
+        }
+
+    private:
+        void accept_impl(Visitor<void>& visitor) const override {
+            visitor.visit(this);
+        }
+
+        literal_t value_;
+    };
+
+    std::unique_ptr<Expr> make_literal(const literal_t& value);
+
+    class Unary : public Expr {
+    public:
+        Unary(Token  operator_, std::unique_ptr<Expr> right)
+            : operator_(std::move(operator_)),
+              right_(std::move(right)) {
+        }
+
+        ~Unary() override;
+
+        [[nodiscard]] const Token& operator_token() const {
+            return operator_;
+        }
+
+        [[nodiscard]] const Expr& right() const {
+            return *right_;
+        }
+
+    private:
+        void accept_impl(Visitor<void>& visitor) const override {
+            visitor.visit(this);
+        }
+
+        Token operator_;
+        std::unique_ptr<Expr> right_;
+    };
+
+    std::unique_ptr<Expr> make_unary(const Token& operator_token, std::unique_ptr<Expr>& right);
+}
