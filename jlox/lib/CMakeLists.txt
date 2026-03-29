@@ -13,6 +13,8 @@ target_sources(lib_jlox
         Scanner.cpp
         Ast.h
         Ast.cpp
+        AstPrinter.h
+        AstPrinter.cpp
 )
 
 target_include_directories(lib_jlox

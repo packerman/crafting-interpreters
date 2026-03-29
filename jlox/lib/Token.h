@@ -26,6 +26,22 @@ namespace jlox {
 
         friend std::ostream& operator<<(std::ostream& os, const Token& token);
 
+        [[nodiscard]] TokenType token_type() const {
+            return token_type_;
+        }
+
+        [[nodiscard]] const std::string& lexeme() const {
+            return lexeme_;
+        }
+
+        [[nodiscard]] const literal_t& literal() const {
+            return literal_;
+        }
+
+        [[nodiscard]] int line() const {
+            return line_;
+        }
+
     private:
         TokenType token_type_;
         std::string lexeme_;

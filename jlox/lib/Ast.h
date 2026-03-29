@@ -18,24 +18,24 @@ namespace jlox {
         public:
             virtual ~Visitor() = default;
 
-            virtual R visit(const Binary*) const = 0;
+            virtual R visit(const Binary*) = 0;
 
-            virtual R visit(const Grouping*) const = 0;
+            virtual R visit(const Grouping*) = 0;
 
-            virtual R visit(const Literal*) const = 0;
+            virtual R visit(const Literal*) = 0;
 
-            virtual R visit(const Unary*) const = 0;
+            virtual R visit(const Unary*) = 0;
         };
 
         virtual ~Expr() = default;
 
         template<typename R>
-        R accept(Visitor<R>& visitor) const {
+        R accept(Visitor<R>* visitor) const {
             return accept_impl(visitor);
         }
 
     private:
-        virtual void accept_impl(Visitor<void>& visitor) const = 0;
+        virtual std::string accept_impl(Visitor<std::string>* visitor) const = 0;
     };
 
     class Binary : public Expr {
@@ -48,21 +48,21 @@ namespace jlox {
 
         ~Binary() override;
 
-        [[nodiscard]] const Expr& left() const {
-            return *left_;
+        [[nodiscard]] const Expr* left() const {
+            return left_.get();
         }
 
         [[nodiscard]] const Token& operator_token() const {
             return operator_;
         }
 
-        [[nodiscard]] const Expr& right() const {
-            return *right_;
+        [[nodiscard]] const Expr* right() const {
+            return right_.get();
         }
 
     private:
-        void accept_impl(Visitor<void>& visitor) const override {
-            visitor.visit(this);
+        std::string accept_impl(Visitor<std::string>* visitor) const override {
+            return visitor->visit(this);
         }
 
         std::unique_ptr<Expr> left_;
@@ -81,13 +81,13 @@ namespace jlox {
 
         ~Grouping() override;
 
-        [[nodiscard]] const Expr& expression() const {
-            return *expression_;
+        [[nodiscard]] const Expr* expression() const {
+            return expression_.get();
         }
 
     private:
-        void accept_impl(Visitor<void>& visitor) const override {
-            visitor.visit(this);
+        std::string accept_impl(Visitor<std::string>* visitor) const override {
+            return visitor->visit(this);
         }
 
         std::unique_ptr<Expr> expression_;
@@ -108,8 +108,8 @@ namespace jlox {
         }
 
     private:
-        void accept_impl(Visitor<void>& visitor) const override {
-            visitor.visit(this);
+        std::string accept_impl(Visitor<std::string>* visitor) const override {
+            return visitor->visit(this);
         }
 
         literal_t value_;
@@ -119,7 +119,7 @@ namespace jlox {
 
     class Unary : public Expr {
     public:
-        Unary(Token  operator_, std::unique_ptr<Expr> right)
+        Unary(Token operator_, std::unique_ptr<Expr> right)
             : operator_(std::move(operator_)),
               right_(std::move(right)) {
         }
@@ -135,8 +135,8 @@ namespace jlox {
         }
 
     private:
-        void accept_impl(Visitor<void>& visitor) const override {
-            visitor.visit(this);
+        std::string accept_impl(Visitor<std::string>* visitor) const override {
+            return visitor.visit(this);
         }
 
         Token operator_;
