@@ -5,6 +5,7 @@ target_sources(jlox_tests
         Common.h
         Common.cpp
         Scanner_test.cpp
+        AstPrinter_test.cpp
 )
 
 target_link_libraries(jlox_tests

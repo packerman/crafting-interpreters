@@ -70,8 +70,8 @@ namespace jlox {
         std::unique_ptr<Expr> right_;
     };
 
-    std::unique_ptr<Expr> make_binary(std::unique_ptr<Expr>& left, const Token& operator_token,
-                                      std::unique_ptr<Expr>& right);
+    std::unique_ptr<Expr> make_binary(std::unique_ptr<Expr> left, const Token& operator_token,
+                                      std::unique_ptr<Expr> right);
 
     class Grouping : public Expr {
     public:
@@ -93,7 +93,7 @@ namespace jlox {
         std::unique_ptr<Expr> expression_;
     };
 
-    std::unique_ptr<Expr> make_grouping(std::unique_ptr<Expr>& expression);
+    std::unique_ptr<Expr> make_grouping(std::unique_ptr<Expr> expression);
 
     class Literal : public Expr {
     public:
@@ -136,12 +136,12 @@ namespace jlox {
 
     private:
         std::string accept_impl(Visitor<std::string>* visitor) const override {
-            return visitor.visit(this);
+            return visitor->visit(this);
         }
 
         Token operator_;
         std::unique_ptr<Expr> right_;
     };
 
-    std::unique_ptr<Expr> make_unary(const Token& operator_token, std::unique_ptr<Expr>& right);
+    std::unique_ptr<Expr> make_unary(const Token& operator_token, std::unique_ptr<Expr> right);
 }
