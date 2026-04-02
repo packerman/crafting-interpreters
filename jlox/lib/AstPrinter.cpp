@@ -1,6 +1,7 @@
 #include "AstPrinter.h"
 
 #include <sstream>
+#include <string>
 
 using namespace std;
 
@@ -17,12 +18,18 @@ namespace jlox {
         return parenthesize("group", {expr->expression()});
     }
 
-    std::string AstPrinter::visit(const Literal*) {
-        return {};
+    std::string AstPrinter::visit(const Literal* expr) {
+        ostringstream oss;
+        if (is_null(expr->value())) {
+            oss << "nil";
+        } else {
+            oss << expr->value();
+        }
+        return oss.str();
     }
 
-    std::string AstPrinter::visit(const Unary*) {
-        return {};
+    std::string AstPrinter::visit(const Unary* expr) {
+        return parenthesize(expr->operator_token().lexeme(), {expr->right()});
     }
 
     std::string AstPrinter::parenthesize(const std::string& name, std::initializer_list<const Expr *> exprs) {

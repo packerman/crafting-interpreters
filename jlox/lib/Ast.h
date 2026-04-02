@@ -46,7 +46,7 @@ namespace jlox {
               right_(std::move(right)) {
         }
 
-        ~Binary() override;
+        ~Binary() override = default;
 
         [[nodiscard]] const Expr* left() const {
             return left_.get();
@@ -79,7 +79,7 @@ namespace jlox {
             : expression_(std::move(expression)) {
         }
 
-        ~Grouping() override;
+        ~Grouping() override = default;
 
         [[nodiscard]] const Expr* expression() const {
             return expression_.get();
@@ -101,7 +101,7 @@ namespace jlox {
             : value_(std::move(value)) {
         }
 
-        ~Literal() override;
+        ~Literal() override = default;
 
         [[nodiscard]] const literal_t& value() const {
             return value_;
@@ -124,14 +124,14 @@ namespace jlox {
               right_(std::move(right)) {
         }
 
-        ~Unary() override;
+        ~Unary() override = default;
 
         [[nodiscard]] const Token& operator_token() const {
             return operator_;
         }
 
-        [[nodiscard]] const Expr& right() const {
-            return *right_;
+        [[nodiscard]] const Expr* right() const {
+            return right_.get();
         }
 
     private:

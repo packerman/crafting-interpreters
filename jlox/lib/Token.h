@@ -10,6 +10,10 @@
 namespace jlox {
     using literal_t = std::variant<std::nullptr_t, std::string, double>;
 
+    std::ostream& operator<<(std::ostream& os, const literal_t& literal);
+
+    bool is_null(const literal_t& literal);
+
     class Token {
     public:
         Token(const TokenType token_type, std::string lexeme, literal_t literal,
